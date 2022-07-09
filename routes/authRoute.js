@@ -9,9 +9,22 @@ router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/reminder",
+    successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
   })
+);
+
+router.get("/github", passport.authenticate("github"));
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/auth/login",
+  }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/dashboard");
+  }
 );
 
 router.get("/logout", (req, res) => {

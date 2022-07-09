@@ -4,6 +4,7 @@ const database = [
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
+    role: "admin",
     reminders: [
       { id: 1, title: "abc", description: "abcabc", completed: false },
     ],
@@ -13,6 +14,7 @@ const database = [
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
     password: "johnny123!",
+    role: "user",
     reminders: [],
   },
   {
@@ -20,6 +22,7 @@ const database = [
     name: "Jonathan Chen",
     email: "jonathan123@gmail.com",
     password: "jonathan123!",
+    role: "user",
     reminders: [],
   },
 ];
@@ -38,6 +41,10 @@ const userModel = {
       return user;
     }
     throw new Error(`Couldn't find user with id: ${id}`);
+  },
+  addNewUser: (user) => {
+    database.push(user);
+    return user;
   },
 };
 

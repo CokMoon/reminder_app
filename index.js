@@ -2,7 +2,7 @@ const express = require("express");
 const ejsLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const path = require("path");
-const port = process.env.port || 8000;
+const port = process.env.port || 8080;
 
 const app = express();
 
@@ -33,21 +33,22 @@ app.use(ejsLayouts);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  console.log(`User details are: `);
-  console.log(req.user);
+// app.use((req, res, next) => {
+//   console.log(`User details are: `);
+//   console.log(req.user);
 
-  console.log("Entire session object:");
-  console.log(req.session);
+//   console.log("Entire session object:");
+//   console.log(req.session);
 
-  console.log(`Session details are: `);
-  console.log(req.session.passport);
-  next();
-});
+//   console.log(`Session details are: `);
+//   console.log(req.session.passport);
+
+//   next();
+// });
 
 app.use("/", indexRoute);
 app.use("/auth", authRoute);
 app.use("/reminder", reminderRoute);
 
 // localhost:8080
-app.listen(8080);
+app.listen(port);

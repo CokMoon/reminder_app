@@ -15,9 +15,11 @@ const reminderController = {
       reminders: req.user.reminders,
     });
   },
+
   new: (req, res) => {
     res.render("reminder/create");
   },
+
   create: (req, res) => {
     const reminder = {
       id: req.user.reminders.length + 1,
@@ -28,6 +30,7 @@ const reminderController = {
     req.user.reminders.push(reminder);
     res.redirect("/reminder");
   },
+
   listOne: (req, res) => {
     const searchResult = findReminder(req.params.id, req.user);
     if (searchResult != undefined) {
@@ -36,10 +39,12 @@ const reminderController = {
       res.redirect("/reminder");
     }
   },
+
   edit: (req, res) => {
     const searchResult = findReminder(req.params.id, req.user);
     res.render("reminder/edit", { reminderItem: searchResult });
   },
+
   update: (req, res) => {
     const searchResultIndex = req.user.reminders.indexOf(
       findReminder(req.params.id, req.user)
@@ -54,6 +59,7 @@ const reminderController = {
     req.user.reminders[searchResultIndex] = updatedReminder;
     res.redirect("/reminder");
   },
+
   delete: (req, res) => {
     req.user.reminders = req.user.reminders.filter(
       (reminder) => !(reminder.id == req.params.id)
